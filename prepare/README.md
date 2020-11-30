@@ -32,11 +32,11 @@ update at 201130
 <br>
 data analyzing for AFAD
 <br><br>
-same with local version
+- same with local version
 ```
 Python AFADcount.py --rootDir AFAD-Full --maleFileName 111
 ```
-help
+- help
 ```
 >Python AFADcount.py -h
 usage: AFADcount.py [-h] --rootDir ROOTDIR --maleFileName MALEFILENAME
@@ -53,7 +53,7 @@ optional arguments:
 ```
 
 ## Prepare Data
-walk root dir
+- walk root dir
 ```
 AFAD-Full
 |--15
