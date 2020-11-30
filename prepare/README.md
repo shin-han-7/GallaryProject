@@ -54,6 +54,8 @@ optional arguments:
 
 ## Prepare Data
 - walk root dir
+- rootDir='AFAD-Full'
+- maleFileName='111'
 ```
 AFAD-Full
 |--15
