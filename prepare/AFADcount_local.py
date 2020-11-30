@@ -66,7 +66,7 @@ plot = dataInfo.plot.bar()
 #print(type(dataFrame['age'].min().astype(int)))
 dataFrame = dataFrame.assign(ageID=dataFrame['age'].values.astype(int) - int(dataFrame['age'].min()))
 ageNum = np.unique(dataFrame['ageID'].values).shape[0]
-#print("Age Num:",ageNum,dataFrame['ageID'].max)
+#print("Age Num:",ageNum,dataFrame['ageID'].max())
 #print(dataFrame.head())
 #print(dataFrame.dtypes)
 
