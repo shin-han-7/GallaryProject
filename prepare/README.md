@@ -28,6 +28,7 @@ dtype: object
 ```
 
 ## AFADcount.py
+update at 201130
 same with local version
 ```
 Python AFADcount.py --rootDir AFAD-Full --maleFileName 111
