@@ -8,7 +8,8 @@ import torch.nn.functional as F
 from torchvision import transforms
 from PIL import Image
 
-
+pathAdience = "D:/CollageProj/2020_gallary/model/Adience/"
+pathAFAD = "D:/CollageProj/2020_gallary/model/AFAD/"
 frame_color = (10,10,205)
 ########################
 ### Face
@@ -35,15 +36,15 @@ def getFaceBox(net, frame, conf_threshold=0.7):
     return frameOpencvDnn, bboxes
 
 
-faceProto = "opencv_face_detector.pbtxt"
-faceModel = "opencv_face_detector_uint8.pb"
+faceProto = pathAdience+"opencv_face_detector.pbtxt"
+faceModel = pathAdience+"opencv_face_detector_uint8.pb"
 faceNet = cv.dnn.readNet(faceModel, faceProto)
 
 ######################
 ### Gender
 ######################
-genderProto = "gender_deploy.prototxt"
-genderModel = "gender_net.caffemodel"
+genderProto = pathAdience+"gender_deploy.prototxt"
+genderModel = pathAdience+"gender_net.caffemodel"
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 genderList = ['Male', 'Female']
 genderNet = cv.dnn.readNet(genderModel, genderProto)
@@ -54,7 +55,7 @@ faceNet = cv.dnn.readNet(faceModel, faceProto)
 ### Age
 ##############################
 torch.backends.cudnn.deterministic = True #
-STATE_DICT_PATH = "./modelPath/model.pt"
+STATE_DICT_PATH = pathAFAD+"model_orcnn.pt"
 GRAYSCALE = False #
 #dataset=afad,start=15,finish=41
 NUM_CLASSES = 26

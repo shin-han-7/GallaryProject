@@ -4,6 +4,7 @@ import math
 import time
 import argparse
 
+frame_color = (10,10,205)
 def getFaceBox(net, frame, conf_threshold=0.7):
     frameOpencvDnn = frame.copy()
     frameHeight = frameOpencvDnn.shape[0]
@@ -22,7 +23,7 @@ def getFaceBox(net, frame, conf_threshold=0.7):
             x2 = int(detections[0, 0, i, 5] * frameWidth)
             y2 = int(detections[0, 0, i, 6] * frameHeight)
             bboxes.append([x1, y1, x2, y2])
-            cv.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight/150)), 8)
+            cv.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), frame_color, int(round(frameHeight/150)), 1)
     return frameOpencvDnn, bboxes
 
 
@@ -30,15 +31,15 @@ parser = argparse.ArgumentParser(description='Use this script to run age and gen
 parser.add_argument('--input', help='Path to input image or video file. Skip this argument to capture frames from a camera.')
 
 args = parser.parse_args()
+pathAdience = "D:/CollageProj/2020_gallary/model/Adience/"
+faceProto = pathAdience+"opencv_face_detector.pbtxt"
+faceModel = pathAdience+"opencv_face_detector_uint8.pb"
 
-faceProto = "opencv_face_detector.pbtxt"
-faceModel = "opencv_face_detector_uint8.pb"
+ageProto = pathAdience+"age_deploy.prototxt"
+ageModel = pathAdience+"age_net.caffemodel"
 
-ageProto = "age_deploy.prototxt"
-ageModel = "age_net.caffemodel"
-
-genderProto = "gender_deploy.prototxt"
-genderModel = "gender_net.caffemodel"
+genderProto = pathAdience+"gender_deploy.prototxt"
+genderModel = pathAdience+"gender_net.caffemodel"
 
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 ageList = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
@@ -85,7 +86,10 @@ while cv.waitKey(1) < 0:
         #print("Age : {}, conf = {:.3f}".format(age, agePreds[0].max()))
 
         label = "{},{}".format(gender, age)
-        cv.putText(frameFace, label, (bbox[0], bbox[1]-10), cv.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv.LINE_AA)
+        
+        cv.rectangle(frameFace, (bbox[0]-2, bbox[3]), (bbox[2]+2, bbox[3]+10), frame_color, -1)
+        cv.putText(frameFace, label, (bbox[0], bbox[3]+10), cv.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 1, cv.LINE_AA)
+        
         cv.imshow("Age Gender Demo", frameFace)
         # cv.imwrite("age-gender-out-{}".format(args.input),frameFace)
     print("time : {:.3f}".format(time.time() - t))
