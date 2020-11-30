@@ -1,13 +1,25 @@
 import numpy as np
 import pandas as pd
 import os
+import  argparse
 
+parser = argparse.ArgumentParser()
+#local
+#parser.add_argument('--rootDir', type=str, help='get dataset dirRoot(path)', default='./AFAD-Full')
+#parser.add_argument('--maleFileName', type=str, help='age/gen dataset gen file name', default='111')
+parser.add_argument('--rootDir', type=str, help='get dataset dirRoot(path)', required = True)
+parser.add_argument('--maleFileName', type=str, help='age/gen dataset gen file name', required = True)
+parser.add_argument('--traincsv', type=str, help='train csv file rename', default='training_set_01.csv')
+parser.add_argument('--testcsv', type=str, help='test csv file rename', default='testing_set_01.csv')
+parser.add_argument('--info', type=str, help='dataset info csv file rename', default='info_01.csv')
+args = parser.parse_args()
+rootDir = args.rootDir
+maleFileName = args.maleFileName
 
 ###################################
 # 01.get all data file full path(files<type:list>)
 ### - get data size
 ###################################
-rootDir = './AFAD-Full'
 files = []
 for (dirpath, dirnames, filenames) in os.walk(rootDir):
     #.\AFAD-Full
@@ -37,7 +49,7 @@ attri['path'] = []
 
 for f in files:
     age, gender, fname = f.split('\\')
-    if gender == '111':
+    if gender == maleFileName:
         gender = 'male'
         genID = 0
     else:
@@ -66,7 +78,7 @@ plot = dataInfo.plot.bar()
 #print(type(dataFrame['age'].min().astype(int)))
 dataFrame = dataFrame.assign(ageID=dataFrame['age'].values.astype(int) - int(dataFrame['age'].min()))
 ageNum = np.unique(dataFrame['ageID'].values).shape[0]
-print("Age Num:",ageNum,dataFrame['ageID'].max)
+print("Age Num:",ageNum,",ageID max:",dataFrame['ageID'].max())
 print(dataFrame.head())
 print(dataFrame.dtypes)
 
@@ -84,10 +96,13 @@ print("Test dataSize:",len(dfTest),"/Train dataSize:",len(dfTrain))
 ########################################
 #05.save to csv file
 ########################################
+train_csv = args.traincsv
+test_csv = args.testcsv
+info_csv = args.info
 #dfTrain.set_index('file', inplace=True)
-dfTrain.to_csv('training_set.csv')
+dfTrain.to_csv(train_csv)
 #dfTest.set_index('file', inplace=True)
-dfTest.to_csv('testing_set.csv')
-dataInfo.to_csv('dataInfo.csv')
+dfTest.to_csv(test_csv)
+dataInfo.to_csv(info_csv)
 
 
