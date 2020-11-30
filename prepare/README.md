@@ -48,3 +48,19 @@ optional arguments:
   --testcsv TESTCSV     test csv file rename
   --info INFO           dataset info csv file rename
 ```
+
+## Prepare Data
+walk root dir
+>AFAD-Full
+>>15
+>>>111
+>>>>./15/111/109008-0.jpg
+>>>>./15/111/114557-0.jpg
+>>>112
+>>16
+>>>111
+>>>112
+>>...
+>>72
+>>>111
+>>>112
