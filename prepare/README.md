@@ -17,12 +17,33 @@ data analyzing for AFAD
 4  15   male      0  116596-2.jpg  15\111\116596-2.jpg      0 
 ```
 ```
-age       object
-gender    object
-genID      int64
-file      object
-path      object
-ageID      int32
+attri     type
+age       <object>
+gender    <object>
+genID     <int64>
+file      <object>
+path      <object>
+ageID     <int32>
 dtype: object
 ```
 
+## AFADcount.py
+same with local version
+```
+Python AFADcount.py --rootDir AFAD-Full --maleFileName 111
+```
+help
+```
+>Python AFADcount.py -h
+usage: AFADcount.py [-h] --rootDir ROOTDIR --maleFileName MALEFILENAME
+                    [--traincsv TRAINCSV] [--testcsv TESTCSV] [--info INFO]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --rootDir ROOTDIR     get dataset dirRoot(path)
+  --maleFileName MALEFILENAME
+                        age/gen dataset gen file name
+  --traincsv TRAINCSV   train csv file rename
+  --testcsv TESTCSV     test csv file rename
+  --info INFO           dataset info csv file rename
+```
