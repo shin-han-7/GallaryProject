@@ -2,5 +2,6 @@ PyTorch Version: 1.7.0
 CUDA device available: True
 Using CUDA device: cuda:0
 Random Seed: 123
+Output Path: 1201hantest
 Task Importance Weight: 0
 Epoch: 001/001 | Batch 0000/1656 | Cost: 33.2865

@@ -14,13 +14,7 @@ trun BATCH_SIZE 256 to 64 to 80
 07.test
 08.save model
 """
-"""
-args==>
-num class (rename age_num)
-epoch
-batch size
-model.pt name
-"""
+
 import os
 import time
 import pandas as pd
@@ -44,11 +38,14 @@ TRAIN_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/training_set.csv'
 TEST_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/testing_set.csv'
 VALID_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/validing_set.csv'
 IMAGE_ROOT = 'D:/DeepLearning/GAR/1202/AFAD-Full/'
-LOGFILE = './training1130.log'
+MODEL_PT_NAME = 'best_model.pt'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cuda',type=int,default=-1)
 parser.add_argument('--seed',type=int,default=123)
+parser.add_argument('--storepath',type=str,required=True)
+parser.add_argument('--epoch',type=int,required=True,help = 'num_epochs')
+parser.add_argument('--batch',type=int,required=True , help = 'BATCH_SIZE')
 parser.add_argument('--imp_weight',type=int,default=0)
 args = parser.parse_args()
 
@@ -62,7 +59,17 @@ if args.seed == -1:
 else:
     RANDOM_SEED = args.seed
 
+STORE_PATH = args.storepath
+if not os.path.exists(STORE_PATH):
+    os.mkdir(STORE_PATH)
+LOGFILE = os.path.join(STORE_PATH, 'training1130.log')
+TEST_PREDICTIONS = os.path.join(STORE_PATH, 'test_predictions.log')
+TEST_ALLPROBAS = os.path.join(STORE_PATH, 'test_allprobas.tensor')
+
 IMP_WEIGHT = args.imp_weight
+num_epochs = args.epoch
+BATCH_SIZE = args.batch
+AGE_NUM = 58#21
 
 ######################
 # 02.Logging
@@ -72,6 +79,7 @@ header.append('PyTorch Version: %s' % torch.__version__)
 header.append('CUDA device available: %s' % torch.cuda.is_available())
 header.append('Using CUDA device: %s' % DEVICE)
 header.append('Random Seed: %s' % RANDOM_SEED)
+header.append('Output Path: %s' % STORE_PATH)
 header.append('Task Importance Weight: %s' % IMP_WEIGHT)
 
 with open(LOGFILE, 'w') as f:
@@ -86,9 +94,9 @@ with open(LOGFILE, 'w') as f:
 ##########################
 NUM_WORKERS = 0 
 learning_rate = 0.0005
-num_epochs = 1#50#200
-NUM_CLASSES = 58#21
-BATCH_SIZE = 80#64
+#num_epochs = 1#50#200
+#AGE_NUM = 58#21
+#BATCH_SIZE = 80#64
 GRAYSCALE = False
 
 df = pd.read_csv(TRAIN_CSV_PATH, index_col=0)
@@ -110,10 +118,10 @@ def task_importance_weights(label_array):
 
 # Data-specific scheme
 if not IMP_WEIGHT:
-    imp = torch.ones(NUM_CLASSES-1, dtype=torch.float)
+    imp = torch.ones(AGE_NUM-1, dtype=torch.float)
 elif IMP_WEIGHT == 1:
     imp = task_importance_weights(ages)
-    imp = imp[0:NUM_CLASSES-1]
+    imp = imp[0:AGE_NUM-1]
 else:
     raise ValueError('Incorrect importance weight parameter.')
 imp = imp.to(DEVICE)
@@ -142,7 +150,7 @@ class AFADDatasetAge(Dataset):
             img = self.transform(img)
 
         label = self.y[index]
-        levels = [1]*label + [0]*(NUM_CLASSES - 1 - label)
+        levels = [1]*label + [0]*(AGE_NUM - 1 - label)
         levels = torch.tensor(levels, dtype=torch.float32)
 
         return img, label, levels
@@ -200,7 +208,7 @@ def cost_fn(logits, levels, imp):
 torch.manual_seed(RANDOM_SEED)
 torch.cuda.manual_seed(RANDOM_SEED)
 ###05.resnet###
-model = resnet34_(NUM_CLASSES, GRAYSCALE)
+model = resnet34_(AGE_NUM, GRAYSCALE)
 model.to(DEVICE)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate) 
 
@@ -261,7 +269,7 @@ for epoch in range(num_epochs):
     if valid_mae < best_mae:
         best_mae, best_rmse, best_epoch = valid_mae, torch.sqrt(valid_mse), epoch
         ########## SAVE MODEL #############
-        torch.save(model.state_dict(), 'best_model.pt')
+        torch.save(model.state_dict(), os.path.join(STORE_PATH, MODEL_PT_NAME))
     
     s = 'MAE/RMSE: | Current Valid: %.2f/%.2f Ep. %d | Best Valid : %.2f/%.2f Ep. %d' % (
         valid_mae, torch.sqrt(valid_mse), epoch, best_mae, best_rmse, best_epoch)
@@ -304,7 +312,7 @@ with open(LOGFILE, 'a') as f:
 # 08.save model
 ###################
 ########## EVALUATE BEST MODEL ######
-model.load_state_dict(torch.load('best_model.pt'))
+model.load_state_dict(torch.load(os.path.join(STORE_PATH, MODEL_PT_NAME)))
 model.eval()
 with torch.set_grad_enabled(False):
     train_mae, train_mse = compute_mae_and_mse(model, train_loader,device=DEVICE)
@@ -333,12 +341,8 @@ with torch.set_grad_enabled(False):
         lst = [str(int(i)) for i in predicted_labels]
         all_pred.extend(lst)
 
-TEST_PREDICTIONS = 'test_predictions.log'
-TEST_ALLPROBAS = 'test_allprobas.tensor'
+
 torch.save(torch.cat(all_probas).to(torch.device('cpu')), TEST_ALLPROBAS)
 with open(TEST_PREDICTIONS, 'w') as f:
     all_pred = ','.join(all_pred)
     f.write(all_pred)
-
-model = model.to(torch.device('cpu'))
-torch.save(model.state_dict(), os.path('model1130.pt'))
