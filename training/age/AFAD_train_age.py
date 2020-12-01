@@ -94,8 +94,7 @@ BATCH_SIZE = 80#64
 GRAYSCALE = False
 
 
-csv_path = TRAIN_CSV_PATH
-df = pd.read_csv(csv_path, index_col=0)
+df = pd.read_csv(TRAIN_CSV_PATH, index_col=0)
 ages = df['ageID'].values
 del df
 ages = torch.tensor(ages, dtype=torch.float)
@@ -143,8 +142,7 @@ class AFADDatasetAge(Dataset):
         self.transform = transform
 
     def __getitem__(self, index):
-        img = Image.open(os.path.join(self.img_dir,
-                                      self.img_paths[index]))
+        img = Image.open(os.path.join(self.img_dir,self.img_paths[index]))
 
         if self.transform is not None:
             img = self.transform(img)
@@ -189,8 +187,8 @@ test_loader = DataLoader(dataset=test_dataset,
 ###########################################
 
 def cost_fn(logits, levels, imp):
-    val = (-torch.sum((F.log_softmax(logits, dim=2)[:, :, 1]*levels
-                      + F.log_softmax(logits, dim=2)[:, :, 0]*(1-levels))*imp, dim=1))
+    val = (-torch.sum((F.logsigmoid(logits)*levels
+                      + (F.logsigmoid(logits) - logits)*(1-levels))*imp,dim=1))
     return torch.mean(val)
 
 

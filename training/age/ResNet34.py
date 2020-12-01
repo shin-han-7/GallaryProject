@@ -61,8 +61,9 @@ class ResNet(nn.Module):
         self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
         self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
-        self.avgpool = nn.AvgPool2d(7, stride=1, padding=2)
-        self.fc = nn.Linear(2048 * block.expansion, (self.num_classes-1)*2)
+        self.avgpool = nn.AvgPool2d(4)
+        self.fc = nn.Linear(512, 1, bias=False)
+        self.linear_1_bias = nn.Parameter(torch.zeros(self.num_classes-1).float())
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -103,8 +104,8 @@ class ResNet(nn.Module):
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
         logits = self.fc(x)
-        logits = logits.view(-1, (self.num_classes-1), 2)
-        probas = F.softmax(logits, dim=2)[:, :, 1]
+        logits = logits + self.linear_1_bias
+        probas = torch.sigmoid(logits)
         return logits, probas
 
 
