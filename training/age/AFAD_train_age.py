@@ -10,8 +10,9 @@ trun BATCH_SIZE 256 to 64 to 80
 03.setting globle
 04.data load
 05.init train(resnet)
-06.train
+06.train(valid:save best model)
 07.test
+08.save model
 """
 """
 args==>
@@ -36,16 +37,19 @@ from PIL import Image
 
 from ResNet34 import resnet34_
 
-
+######################
+# 01.args
+#######################
 TRAIN_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/training_set.csv'
 TEST_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/testing_set.csv'
-IMAGE_ROOT = 'D:/DeepLearning/GAR/1202/AFAD-Full'
+VALID_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/validing_set.csv'
+IMAGE_ROOT = 'D:/DeepLearning/GAR/1202/AFAD-Full/'
+LOGFILE = './training1130.log'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cuda',type=int,default=-1)
 parser.add_argument('--seed',type=int,default=123)
 parser.add_argument('--imp_weight',type=int,default=0)
-parser.add_argument('--train_log',type=str,default='training1130.log',help='file to print training info')
 args = parser.parse_args()
 
 if args.cuda >= 0:
@@ -59,10 +63,9 @@ else:
     RANDOM_SEED = args.seed
 
 IMP_WEIGHT = args.imp_weight
-LOGFILE = args.train_log
 
 ######################
-# Logging
+# 02.Logging
 #######################
 header = []
 header.append('PyTorch Version: %s' % torch.__version__)
@@ -79,33 +82,24 @@ with open(LOGFILE, 'w') as f:
 
 
 ##########################
-# SETTINGS
+# 03.SETTINGS
 ##########################
 NUM_WORKERS = 0 
-#for [error32]broken pipe #4->0
-
-# Hyperparameters
 learning_rate = 0.0005
 num_epochs = 1#50#200
-
-# Architecture
 NUM_CLASSES = 58#21
 BATCH_SIZE = 80#64
 GRAYSCALE = False
-
 
 df = pd.read_csv(TRAIN_CSV_PATH, index_col=0)
 ages = df['ageID'].values
 del df
 ages = torch.tensor(ages, dtype=torch.float)
 
-
 def task_importance_weights(label_array):
     uniq = torch.unique(label_array)
     num_examples = label_array.size(0)
-
     m = torch.zeros(uniq.shape[0])
-
     for i, t in enumerate(torch.arange(torch.min(uniq), torch.max(uniq))):
         m_k = torch.max(torch.tensor([label_array[label_array > t].size(0), 
                                       num_examples - label_array[label_array > t].size(0)]))
@@ -113,7 +107,6 @@ def task_importance_weights(label_array):
 
     imp = m/torch.max(m)
     return imp
-
 
 # Data-specific scheme
 if not IMP_WEIGHT:
@@ -127,7 +120,7 @@ imp = imp.to(DEVICE)
 
 
 ###################
-# DataLoad
+# 04.DataLoad
 ###################
 class AFADDatasetAge(Dataset):
     """Custom Dataset for loading AFAD face images"""
@@ -142,7 +135,8 @@ class AFADDatasetAge(Dataset):
         self.transform = transform
 
     def __getitem__(self, index):
-        img = Image.open(os.path.join(self.img_dir,self.img_paths[index]))
+        img = Image.open(os.path.join(self.img_dir,
+                                      self.img_paths[index]))
 
         if self.transform is not None:
             img = self.transform(img)
@@ -165,11 +159,17 @@ train_dataset = AFADDatasetAge(csv_path=TRAIN_CSV_PATH,
                                img_dir=IMAGE_ROOT,
                                transform=custom_transform)
 
+custom_transform2 = transforms.Compose([transforms.Resize((128, 128)),
+                                        transforms.CenterCrop((120, 120)),
+                                        transforms.ToTensor()])
 
 test_dataset = AFADDatasetAge(csv_path=TEST_CSV_PATH,
                               img_dir=IMAGE_ROOT,
-                              transform=custom_transform)
+                              transform=custom_transform2)
 
+valid_dataset = AFADDatasetAge(csv_path=VALID_CSV_PATH,
+                               img_dir=IMAGE_ROOT,
+                               transform=custom_transform2)
 
 train_loader = DataLoader(dataset=train_dataset,
                           batch_size=BATCH_SIZE,
@@ -181,9 +181,14 @@ test_loader = DataLoader(dataset=test_dataset,
                          shuffle=False,
                          num_workers=NUM_WORKERS)
 
+valid_loader = DataLoader(dataset=valid_dataset,
+                          batch_size=BATCH_SIZE,
+                          shuffle=False,
+                          num_workers=NUM_WORKERS)
+
 
 ###########################################
-# Initialize Cost, Model, and Optimizer
+# 05.Initialize Cost, Model, and Optimizer
 ###########################################
 
 def cost_fn(logits, levels, imp):
@@ -194,18 +199,33 @@ def cost_fn(logits, levels, imp):
 
 torch.manual_seed(RANDOM_SEED)
 torch.cuda.manual_seed(RANDOM_SEED)
-###
-#resnet
-###
+###05.resnet###
 model = resnet34_(NUM_CLASSES, GRAYSCALE)
-
 model.to(DEVICE)
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate) 
 
 ########
-#training
+#06.training
 #########
+def compute_mae_and_mse(model, data_loader, device):
+    mae, mse, num_examples = 0, 0, 0
+    for i, (features, targets, levels) in enumerate(data_loader):
+
+        features = features.to(device)
+        targets = targets.to(device)
+
+        logits, probas = model(features)
+        predict_levels = probas > 0.5
+        predicted_labels = torch.sum(predict_levels, dim=1)
+        num_examples += targets.size(0)
+        mae += torch.sum(torch.abs(predicted_labels - targets))
+        mse += torch.sum((predicted_labels - targets)**2)
+    mae = mae.float() / num_examples
+    mse = mse.float() / num_examples
+    return mae, mse
+
 start_time = time.time()
+best_mae, best_rmse, best_epoch = 999, 999, -1
 for epoch in range(num_epochs):
 
     model.train()
@@ -229,45 +249,47 @@ for epoch in range(num_epochs):
         # LOGGING
         if not batch_idx % 50:
             s = ('Epoch: %03d/%03d | Batch %04d/%04d | Cost: %.4f'
-                 % (epoch+1, num_epochs, batch_idx,len(train_loader)//BATCH_SIZE, cost))
+                 % (epoch+1, num_epochs, batch_idx,len(train_dataset)//BATCH_SIZE, cost))
             print(s)
             with open(LOGFILE, 'a') as f:
                 f.write('%s\n' % s)
+    
+    ########### Valid ##############
+    model.eval()
+    with torch.set_grad_enabled(False):
+        valid_mae, valid_mse = compute_mae_and_mse(model, valid_loader,device=DEVICE)
+    if valid_mae < best_mae:
+        best_mae, best_rmse, best_epoch = valid_mae, torch.sqrt(valid_mse), epoch
+        ########## SAVE MODEL #############
+        torch.save(model.state_dict(), 'best_model.pt')
+    
+    s = 'MAE/RMSE: | Current Valid: %.2f/%.2f Ep. %d | Best Valid : %.2f/%.2f Ep. %d' % (
+        valid_mae, torch.sqrt(valid_mse), epoch, best_mae, best_rmse, best_epoch)
+    print(s)
+    with open(LOGFILE, 'a') as f:
+        f.write('%s\n' % s)
+    ################################
 
     s = 'Time elapsed: %.2f min' % ((time.time() - start_time)/60)
     print(s)
     with open(LOGFILE, 'a') as f:
         f.write('%s\n' % s)
 
-#######
-#testing
-#######
-def compute_mae_and_mse(model, data_loader, device):
-    mae, mse, num_examples = 0, 0, 0
-    for i, (features, targets, levels) in enumerate(data_loader):
 
-        features = features.to(device)
-        targets = targets.to(device)
-
-        logits, probas = model(features)
-        predict_levels = probas > 0.5
-        predicted_labels = torch.sum(predict_levels, dim=1)
-        num_examples += targets.size(0)
-        mae += torch.sum(torch.abs(predicted_labels - targets))
-        mse += torch.sum((predicted_labels - targets)**2)
-    mae = mae.float() / num_examples
-    mse = mse.float() / num_examples
-    return mae, mse
-
-
+#####################
+# 07.testing
+######################
 model.eval()
 with torch.set_grad_enabled(False):  # save memory during inference
 
     train_mae, train_mse = compute_mae_and_mse(model, train_loader,device=DEVICE)
+    valid_mae, valid_mse = compute_mae_and_mse(model, valid_loader,device=DEVICE)
     test_mae, test_mse = compute_mae_and_mse(model, test_loader,device=DEVICE)
 
-    s = 'MAE/RMSE: | Train: %.2f/%.2f | Test: %.2f/%.2f' % (
-        train_mae, torch.sqrt(train_mse), test_mae, torch.sqrt(test_mse))
+    s = 'MAE/RMSE: | Train: %.2f/%.2f | Valid: %.2f/%.2f | Test: %.2f/%.2f' % (
+        train_mae, torch.sqrt(train_mse),
+        valid_mae, torch.sqrt(valid_mse),
+        test_mae, torch.sqrt(test_mse))
     print(s)
     with open(LOGFILE, 'a') as f:
         f.write('%s\n' % s)
@@ -276,6 +298,47 @@ s = 'Total Training Time: %.2f min' % ((time.time() - start_time)/60)
 print(s)
 with open(LOGFILE, 'a') as f:
     f.write('%s\n' % s)
+
+
+###################
+# 08.save model
+###################
+########## EVALUATE BEST MODEL ######
+model.load_state_dict(torch.load('best_model.pt'))
+model.eval()
+with torch.set_grad_enabled(False):
+    train_mae, train_mse = compute_mae_and_mse(model, train_loader,device=DEVICE)
+    valid_mae, valid_mse = compute_mae_and_mse(model, valid_loader,device=DEVICE)
+    test_mae, test_mse = compute_mae_and_mse(model, test_loader,device=DEVICE)
+
+    s = 'MAE/RMSE: | Best Train: %.2f/%.2f | Best Valid: %.2f/%.2f | Best Test: %.2f/%.2f' % (
+        train_mae, torch.sqrt(train_mse),
+        valid_mae, torch.sqrt(valid_mse),
+        test_mae, torch.sqrt(test_mse))
+    print(s)
+    with open(LOGFILE, 'a') as f:
+        f.write('%s\n' % s)
+
+########## SAVE PREDICTIONS ######
+all_pred = []
+all_probas = []
+with torch.set_grad_enabled(False):
+    for batch_idx, (features, targets, levels) in enumerate(test_loader):
+        
+        features = features.to(DEVICE)
+        logits, probas = model(features)
+        all_probas.append(probas)
+        predict_levels = probas > 0.5
+        predicted_labels = torch.sum(predict_levels, dim=1)
+        lst = [str(int(i)) for i in predicted_labels]
+        all_pred.extend(lst)
+
+TEST_PREDICTIONS = 'test_predictions.log'
+TEST_ALLPROBAS = 'test_allprobas.tensor'
+torch.save(torch.cat(all_probas).to(torch.device('cpu')), TEST_ALLPROBAS)
+with open(TEST_PREDICTIONS, 'w') as f:
+    all_pred = ','.join(all_pred)
+    f.write(all_pred)
 
 model = model.to(torch.device('cpu'))
 torch.save(model.state_dict(), os.path('model1130.pt'))

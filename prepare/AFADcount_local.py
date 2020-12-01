@@ -7,7 +7,7 @@ import os
 # 01.get all data file full path(files<type:list>)
 ### - get data size
 ###################################
-rootDir = 'D:/DeepLearning/GAR/1202/AFAD-Full'
+rootDir = 'D:\\DeepLearning\\GAR\\1202\\AFAD-Full'
 files = []
 for (dirpath, dirnames, filenames) in os.walk(rootDir):
     #.\AFAD-Full
@@ -19,7 +19,7 @@ for (dirpath, dirnames, filenames) in os.walk(rootDir):
             #18\111\100062-0.jpg
             files.append(os.path.relpath(os.path.join(dirpath,file),rootDir))
 print("Data size:",len(files))
-print("Data form:",files[0])
+#print("Data form:",files[0])
 
 
 ###################################
@@ -68,7 +68,7 @@ dataFrame = dataFrame.assign(ageID=dataFrame['age'].values.astype(int) - int(dat
 ageNum = np.unique(dataFrame['ageID'].values).shape[0]
 #print("Age Num:",ageNum,dataFrame['ageID'].max())
 #print(dataFrame.head())
-#print(dataFrame.dtypes)
+print(dataFrame.dtypes)
 
 
 #######################################
@@ -76,18 +76,24 @@ ageNum = np.unique(dataFrame['ageID'].values).shape[0]
 ### - random
 #######################################
 np.random.seed(123)
-index = np.random.rand(len(dataFrame)) < 0.8
-dfTrain = dataFrame[index]
-dfTest = dataFrame[~index]
-#print("Test dataSize:",len(dfTest),"/Train dataSize:",len(dfTrain))
+probs = np.random.rand(len(dataFrame))
+train_msk = probs < 0.8
+test_msk = (probs>=0.8) & (probs < 0.9)
+valid_msk = probs >= 0.9
+dfTrain = dataFrame[train_msk]
+dfTest = dataFrame[test_msk]
+dfValid = dataFrame[valid_msk]
+print("len train,vaild,test = ",len(dfTrain),len(dfValid),len(dfTest))
 
 ########################################
 #05.save to csv file
 ########################################
-#dfTrain.set_index('file', inplace=True)
-#dfTrain.to_csv('training_set.csv')
-#dfTest.set_index('file', inplace=True)
-#dfTest.to_csv('testing_set.csv')
-#dataInfo.to_csv('dataInfo.csv')
+dfTrain.set_index('file', inplace=True)
+dfTrain.to_csv('training_set.csv')
+dfValid.set_index('file', inplace=True)
+dfValid.to_csv('validing_set.csv')
+dfTest.set_index('file', inplace=True)
+dfTest.to_csv('testing_set.csv')
+dataInfo.to_csv('dataInfo.csv')
 
 
