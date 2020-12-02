@@ -34,10 +34,10 @@ from ResNet34 import resnet34_
 ######################
 # 01.args
 #######################
-TRAIN_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/training_set.csv'
-TEST_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/testing_set.csv'
-VALID_CSV_PATH = 'D:/CollageProj/2020_gallary/prepare/validing_set.csv'
-IMAGE_ROOT = 'D:/DeepLearning/GAR/1202/AFAD-Full/'
+TRAIN_CSV_PATH = 'dataset/training_set.csv'
+TEST_CSV_PATH = 'dataset/testing_set.csv'
+VALID_CSV_PATH = 'dataset/validing_set.csv'
+IMAGE_ROOT = 'AFAD-Full/'
 MODEL_PT_NAME = 'best_model.pt'
 
 parser = argparse.ArgumentParser()
