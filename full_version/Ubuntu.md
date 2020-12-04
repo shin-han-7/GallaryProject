@@ -22,6 +22,7 @@ $ virtualenv --version
 $ pip3 install virtualenv
 $ sudo apt-get install python3-venv
 #2
+path to target evn dir
 $ python3 -m venv pytorch_gpu
 #3
 $ source pytorch_gpu/bin/activate
