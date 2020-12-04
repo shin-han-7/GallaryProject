@@ -14,7 +14,7 @@ sudo apt-get install python-pip
 pip3 -V 
 sudo apt-get install python3-pip
 ```
-03. envs
+03. envs <br>
 python3
 ```
 #1
@@ -32,7 +32,6 @@ $ pip install 安裝虛擬環境內所需套件
 #6
 (<環境名稱>)$ deactivate
 ```
-進入資料夾 : xxxx/bin$ source activate
 
 04. pytorch_gpu envs
 pytorch_gpu setting tutorial:<br>
