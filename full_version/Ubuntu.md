@@ -40,7 +40,7 @@ https://codingnote.cc/zh-tw/p/177346/ <br>
 Ubuntu18.04下安装深度学习框架Pytorch（GPU加速）:<br>
 https://blog.csdn.net/wuzhiwuweisun/article/details/82753403 <br>
 
-05.Other reference
+05. Other reference
 liunx ins: <br>
 https://blog.techbridge.cc/2017/12/23/linux-commnd-line-tutorial/
 
