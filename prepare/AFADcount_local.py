@@ -7,7 +7,7 @@ import os
 # 01.get all data file full path(files<type:list>)
 ### - get data size
 ###################################
-rootDir = 'D:\\DeepLearning\\GAR\\1202\\AFAD-Full'
+rootDir = '.../dataset/AFAD-Full'
 files = []
 for (dirpath, dirnames, filenames) in os.walk(rootDir):
     #.\AFAD-Full

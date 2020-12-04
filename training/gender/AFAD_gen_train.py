@@ -18,11 +18,11 @@ import matplotlib.pyplot as plt
 #####################
 # setting
 #####################
-TRAIN_CSV_PATH = 'training_set.csv'
-TEST_CSV_PATH = 'testing_set.csv'
-VALID_CSV_PATH = 'validing_set.csv'
-ROOT_DIR = 'D:/DeepLearning/GAR/1202/AFAD-Full'
-MODEL_SAVE = 'model_CNN.pth'
+TRAIN_CSV_PATH = '.../prepare/training_set.csv'
+TEST_CSV_PATH = '.../prepare/testing_set.csv'
+VALID_CSV_PATH = '.../prepare/validing_set.csv'
+ROOT_DIR = '.../dataset/AFAD-Full'
+MODEL_SAVE = 'model_gen.pt'
 
 LEARN_RATE = 0.001
 BATCH_SIZE = 50#100

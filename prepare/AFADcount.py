@@ -11,6 +11,7 @@ parser.add_argument('--rootDir', type=str, help='get dataset dirRoot(path)', req
 parser.add_argument('--maleFileName', type=str, help='age/gen dataset gen file name', required = True)
 parser.add_argument('--traincsv', type=str, help='train csv file rename', default='training_set_01.csv')
 parser.add_argument('--testcsv', type=str, help='test csv file rename', default='testing_set_01.csv')
+parser.add_argument('--validcsv', type=str, help='valid csv file rename', default='validing_set_01.csv')
 parser.add_argument('--info', type=str, help='dataset info csv file rename', default='info_01.csv')
 args = parser.parse_args()
 rootDir = args.rootDir
@@ -78,8 +79,8 @@ plot = dataInfo.plot.bar()
 #print(type(dataFrame['age'].min().astype(int)))
 dataFrame = dataFrame.assign(ageID=dataFrame['age'].values.astype(int) - int(dataFrame['age'].min()))
 ageNum = np.unique(dataFrame['ageID'].values).shape[0]
-print("Age Num:",ageNum,",ageID max:",dataFrame['ageID'].max())
-print(dataFrame.head())
+#print("Age Num:",ageNum,",ageID max:",dataFrame['ageID'].max())
+#print(dataFrame.head())
 print(dataFrame.dtypes)
 
 
@@ -88,21 +89,31 @@ print(dataFrame.dtypes)
 ### - random
 #######################################
 np.random.seed(123)
-index = np.random.rand(len(dataFrame)) < 0.8
-dfTrain = dataFrame[index]
-dfTest = dataFrame[~index]
-print("Test dataSize:",len(dfTest),"/Train dataSize:",len(dfTrain))
+probs = np.random.rand(len(dataFrame))
+train_msk = probs < 0.8
+test_msk = (probs>=0.8) & (probs < 0.9)
+valid_msk = probs >= 0.9
+dfTrain = dataFrame[train_msk]
+dfTest = dataFrame[test_msk]
+dfValid = dataFrame[valid_msk]
+print("len train,vaild,test = ",len(dfTrain),len(dfValid),len(dfTest))
 
 ########################################
 #05.save to csv file
 ########################################
 train_csv = args.traincsv
-test_csv = args.testcsv
-info_csv = args.info
-#dfTrain.set_index('file', inplace=True)
+dfTrain.set_index('file', inplace=True)
 dfTrain.to_csv(train_csv)
-#dfTest.set_index('file', inplace=True)
+
+test_csv = args.testcsv
+dfTest.set_index('file', inplace=True)
 dfTest.to_csv(test_csv)
+
+valid_cvs = args.validcsv
+dfValid.set_index('file', inplace=True)
+dfValid.to_csv(valid_csv)
+
+info_csv = args.info
 dataInfo.to_csv(info_csv)
 
 
