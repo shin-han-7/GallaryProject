@@ -12,28 +12,53 @@ import pandas as pd
 from PIL import Image
 import time
 import os
-import matplotlib.pyplot as plt
-
+import argparse
 
 #####################
 # setting
 #####################
-TRAIN_CSV_PATH = '.../prepare/training_set.csv'
-TEST_CSV_PATH = '.../prepare/testing_set.csv'
-VALID_CSV_PATH = '.../prepare/validing_set.csv'
-ROOT_DIR = '.../dataset/AFAD-Full'
-MODEL_SAVE = 'model_gen.pt'
+TRAIN_CSV_PATH = '../../prepare/training_set.csv'
+TEST_CSV_PATH = '../../prepare/testing_set.csv'
+VALID_CSV_PATH = '../../prepare/validing_set.csv'
+ROOT_DIR = '../../dataset/AFAD-Full'
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--cuda',type=int,default=-1)
+parser.add_argument('--storepath',type=str,required=True)
+parser.add_argument('--epoch',type=int,required=True,help = 'num_epochs')
+parser.add_argument('--batch',type=int,required=True , help = 'BATCH_SIZE')
+args = parser.parse_args()
 
 LEARN_RATE = 0.001
-BATCH_SIZE = 50#100
-EPOCH = 3#10
+BATCH_SIZE = args.batch
+EPOCH = args.epoch
 NUM_WORKERS = 0
+STORE_PATH = args.storepath
+if not os.path.exists(STORE_PATH):
+    os.mkdir(STORE_PATH)
+LOGFILE = os.path.join(STORE_PATH, 'training.log')
+MODEL_SAVE = os.path.join(STORE_PATH,'model_gen.pt')
 
-cuda = 0
+cuda = args.cuda
 if cuda >= 0:
     DEVICE = torch.device("cuda:%d" % cuda)
 else:
     DEVICE = torch.device("cpu")
+
+###################
+# logging
+###################
+header = []
+header.append('PyTorch Version: %s' % torch.__version__)
+header.append('CUDA device available: %s' % torch.cuda.is_available())
+header.append('Using CUDA device: %s' % DEVICE)
+header.append('Output Path: %s' % STORE_PATH)
+
+with open(LOGFILE, 'w') as f:
+    for entry in header:
+        print(entry)
+        f.write('%s\n' % entry)
+        f.flush()
 
 
 ##########################
@@ -169,16 +194,16 @@ summary(model.to(DEVICE), (3, 227, 227))
 ##################
 # Train
 #################
-from tqdm import tqdm_notebook as tqdm
+#from tqdm import tqdm_notebook as tqdm
 # show train sechdule line
 model.to(DEVICE)
-cirterion = nn.CrossEntropyLoss()
+criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=LEARN_RATE, momentum = 0.9)
 
 valid_loss_min = np.Inf # track change in validation loss
 train_losses,valid_losses=[],[]
 
-for epoch in range(1, EPOCH):
+for epoch in range(1, EPOCH + 1):
     # keep track of training and validation loss
     train_loss = 0.0
     valid_loss = 0.0
@@ -187,7 +212,7 @@ for epoch in range(1, EPOCH):
     ############train############
     model.train()
     #for data, target in train_loader:
-    for data, target in tqdm(train_loader):
+    for batch_idx, (data, target) in enumerate(train_loader):
         # move tensors to GPU if CUDA is available
         data, target = data.to(DEVICE), target.to(DEVICE)
         # clear the gradients of all optimized variables
@@ -202,10 +227,11 @@ for epoch in range(1, EPOCH):
         optimizer.step()
         # update training loss
         train_loss += loss.item()*data.size(0)
+
         
     ######### valid##########
     model.eval()
-    for data, target in tqdm(valid_loader):
+    for batch_idx, (data, target) in enumerate(valid_loader):
         # move tensors to GPU if CUDA is available
         data, target = data.to(DEVICE), target.to(DEVICE)
         # forward pass: compute predicted outputs by passing inputs to the model
@@ -221,9 +247,11 @@ for epoch in range(1, EPOCH):
     train_loss = train_loss/len(train_loader.dataset)
     valid_loss = valid_loss/len(valid_loader.dataset)
         
-    # print training/validation statistics 
-    print('\tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format(
-        train_loss, valid_loss))
+    # logging training/validation statistics 
+    s = ('\tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format(train_loss, valid_loss))
+    print(s)
+    with open(LOGFILE, 'a') as f:
+        f.write('%s\n' % s)
     
     # save model if validation loss has decreased
     if valid_loss <= valid_loss_min:
@@ -257,10 +285,13 @@ def test(loaders, model, criterion):
         # compare predictions to true label
         correct += np.sum(np.squeeze(pred.eq(target.data.view_as(pred))).cpu().numpy())
         total += data.size(0)
-            
-    print('Test Loss: {:.6f}'.format(test_loss))
-    print('Test Accuracy: %2d%% (%2d/%2d)' % (100. * correct / total, correct, total))
-
+    #logging    
+    s = ('Test Loss: {:.6f} | Test Accuracy: %2d%% (%2d/%2d)'.format(
+        test_loss , 100. * correct / total, correct, total))
+    print(s)
+    with open(LOGFILE, 'a') as f:
+        f.write('%s\n' % s)
+    
 
 model.to(DEVICE)
 test(test_loader, model, criterion)

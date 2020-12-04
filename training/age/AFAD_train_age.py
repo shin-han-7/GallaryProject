@@ -1,10 +1,4 @@
 """
-1130 for finish quickly
-turn num_epochs 200 to 1
-trun BATCH_SIZE 256 to 64 to 80
-
-"""
-"""
 01.args
 02.log
 03.setting globle
@@ -34,10 +28,10 @@ from ResNet34 import resnet34_
 ######################
 # 01.args
 #######################
-TRAIN_CSV_PATH = '.../prepare/training_set.csv'
-TEST_CSV_PATH = '.../prepare/testing_set.csv'
-VALID_CSV_PATH = '.../prepare/validing_set.csv'
-IMAGE_ROOT = '.../dataset/AFAD-Full/'
+TRAIN_CSV_PATH = '../../prepare/training_set.csv'
+TEST_CSV_PATH = '../../prepare/testing_set.csv'
+VALID_CSV_PATH = '../../prepare/validing_set.csv'
+IMAGE_ROOT = '../../dataset/AFAD-Full/'
 MODEL_PT_NAME = 'best_model.pt'
 
 parser = argparse.ArgumentParser()
