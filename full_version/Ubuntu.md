@@ -1,5 +1,5 @@
 ## Ubuntu envs setting
-01. open ubuntu
+01. open cmd
 ```
 cmd >bash
 ```
@@ -9,43 +9,40 @@ cmd >bash
 ```
 02. pip & python
 ```
---version
+pip --version
 sudo apt-get install python-pip
-pip -V 
+pip3 -V 
 sudo apt-get install python3-pip
 ```
 03. envs
-建立：mkvirtualenv xxxx<br>
-刪除：revirtuallenv xxxx<br>
-進入：workon xxxx<br>
-退出：deactivate<br>
-xxx : envs name
-```
---version
-pip install virtualenv
-```
-python3<br>
+python3
 ```
 #1
-$ sudo apt-get install python3-pip
+$ virtualenv --version
 $ pip3 install virtualenv
+$ sudo apt-get install python3-venv
 #2
-$ which python3
-$ virtualenv -p <python路徑> <想創建的環境名稱>
+$ python3 -m venv pytorch_gpu
 #3
-$ source <環境名稱>/bin/activate
+$ source pytorch_gpu/bin/activate
 #4
 (<環境名稱>)$
-(<環境名稱>)$ deactivate
 #5
-pip install 安裝虛擬環境內所需套件
+$ pip install 安裝虛擬環境內所需套件
+#6
+(<環境名稱>)$ deactivate
 ```
 進入資料夾 : xxxx/bin$ source activate
 
 04. pytorch_gpu envs
-pytorch_gpu setting tutorial:
-https://codingnote.cc/zh-tw/p/177346/
-Ubuntu18.04下安装深度学习框架Pytorch（GPU加速）:
-https://blog.csdn.net/wuzhiwuweisun/article/details/82753403
+pytorch_gpu setting tutorial:<br>
+https://codingnote.cc/zh-tw/p/177346/ <br>
+Ubuntu18.04下安装深度学习框架Pytorch（GPU加速）:<br>
+https://blog.csdn.net/wuzhiwuweisun/article/details/82753403 <br>
+
+05.Other reference
+liunx ins: <br>
+https://blog.techbridge.cc/2017/12/23/linux-commnd-line-tutorial/
+
 
 
