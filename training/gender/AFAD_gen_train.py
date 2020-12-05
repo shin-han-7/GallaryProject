@@ -20,7 +20,7 @@ import argparse
 TRAIN_CSV_PATH = '../../prepare/training_set.csv'
 TEST_CSV_PATH = '../../prepare/testing_set.csv'
 VALID_CSV_PATH = '../../prepare/validing_set.csv'
-ROOT_DIR = '../../dataset/AFAD-Full/AFAD-Full'
+ROOT_DIR = '..\\..\\dataset\\AFAD-Full\\AFAD-Full'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cuda',type=int,default=-1)
