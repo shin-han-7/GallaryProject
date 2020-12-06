@@ -61,7 +61,7 @@ for f in files:
     attri['gender'].append(gender)
     attri['genID'].append(genID)
     attri['file'].append(fname)
-    attri['path'].append(f)
+    attri['path'].append(age+'/'+gen+'/'+fname)
 
 dataFrame = pd.DataFrame.from_dict(attri)
 #print(dataFrame.head())

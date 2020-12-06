@@ -7,7 +7,7 @@ import os
 # 01.get all data file full path(files<type:list>)
 ### - get data size
 ###################################
-rootDir = '.../dataset/AFAD-Full'
+rootDir = 'D:/DeepLearning/GAR/1202/AFAD-Full'
 files = []
 for (dirpath, dirnames, filenames) in os.walk(rootDir):
     #.\AFAD-Full
@@ -36,8 +36,8 @@ attri['file'] = []
 attri['path'] = []
 
 for f in files:
-    age, gender, fname = f.split('\\')
-    if gender == '111':
+    age, gen, fname = f.split('\\')
+    if gen == '111':
         gender = 'male'
         genID = 0
     else:
@@ -48,7 +48,8 @@ for f in files:
     attri['gender'].append(gender)
     attri['genID'].append(genID)
     attri['file'].append(fname)
-    attri['path'].append(f)
+    #.\AFAD-Lite\18\111\100062-0.jpg
+    attri['path'].append(age+'/'+gen+'/'+fname)
 
 dataFrame = pd.DataFrame.from_dict(attri)
 #print(dataFrame.head())
