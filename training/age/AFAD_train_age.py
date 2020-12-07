@@ -31,7 +31,7 @@ from ResNet34 import resnet34_
 TRAIN_CSV_PATH = '../../prepare/training_set.csv'
 TEST_CSV_PATH = '../../prepare/testing_set.csv'
 VALID_CSV_PATH = '../../prepare/validing_set.csv'
-IMAGE_ROOT = '../../dataset/AFAD-Full/AFAD-Full'
+IMAGE_ROOT = '../../dataset/AFAD-Full'
 MODEL_PT_NAME = 'best_model.pt'
 
 parser = argparse.ArgumentParser()
