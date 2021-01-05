@@ -1,0 +1,28 @@
+PyTorch Version: 1.7.0
+CUDA device available: True
+Using CUDA device: cuda:1
+Output Path: test1209
+Epoch: 002/001 | Batch 0000/1035 | Cost: 0.6891
+Epoch: 002/001 | Batch 0050/1035 | Cost: 0.5502
+Epoch: 002/001 | Batch 0100/1035 | Cost: 0.5694
+Epoch: 002/001 | Batch 0150/1035 | Cost: 0.4812
+Epoch: 002/001 | Batch 0200/1035 | Cost: 0.5703
+Epoch: 002/001 | Batch 0250/1035 | Cost: 0.4962
+Epoch: 002/001 | Batch 0300/1035 | Cost: 0.5300
+Epoch: 002/001 | Batch 0350/1035 | Cost: 0.5151
+Epoch: 002/001 | Batch 0400/1035 | Cost: 0.4704
+Epoch: 002/001 | Batch 0450/1035 | Cost: 0.4309
+Epoch: 002/001 | Batch 0500/1035 | Cost: 0.4719
+Epoch: 002/001 | Batch 0550/1035 | Cost: 0.4151
+Epoch: 002/001 | Batch 0600/1035 | Cost: 0.4597
+Epoch: 002/001 | Batch 0650/1035 | Cost: 0.4975
+Epoch: 002/001 | Batch 0700/1035 | Cost: 0.4850
+Epoch: 002/001 | Batch 0750/1035 | Cost: 0.4459
+Epoch: 002/001 | Batch 0800/1035 | Cost: 0.4587
+Epoch: 002/001 | Batch 0850/1035 | Cost: 0.5123
+Epoch: 002/001 | Batch 0900/1035 | Cost: 0.4241
+Epoch: 002/001 | Batch 0950/1035 | Cost: 0.4180
+Epoch: 002/001 | Batch 1000/1035 | Cost: 0.4648
+	Training Loss: 0.491066 	Validation Loss: 0.437426
+Time elapsed: 3.87 min
+Test Loss: 0.444308 | Test Accuracy: %2d%% (%2d/%2d)

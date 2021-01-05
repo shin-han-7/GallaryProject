@@ -1,0 +1,395 @@
+PyTorch Version: 1.7.0
+CUDA device available: True
+Using CUDA device: cuda:0
+Output Path: test1207
+Epoch: 002/030 | Batch 0000/0517 | Cost: 0.6903
+Epoch: 002/030 | Batch 0050/0517 | Cost: 0.6862
+Epoch: 002/030 | Batch 0100/0517 | Cost: 0.6781
+Epoch: 002/030 | Batch 0150/0517 | Cost: 0.6759
+Epoch: 002/030 | Batch 0200/0517 | Cost: 0.6777
+Epoch: 002/030 | Batch 0250/0517 | Cost: 0.6882
+Epoch: 002/030 | Batch 0300/0517 | Cost: 0.6447
+Epoch: 002/030 | Batch 0350/0517 | Cost: 0.6754
+Epoch: 002/030 | Batch 0400/0517 | Cost: 0.6563
+Epoch: 002/030 | Batch 0450/0517 | Cost: 0.6837
+Epoch: 002/030 | Batch 0500/0517 | Cost: 0.6599
+	Training Loss: 0.673522 	Validation Loss: 0.668785
+Time elapsed: 4.15 min
+Epoch: 003/030 | Batch 0000/0517 | Cost: 0.6508
+Epoch: 003/030 | Batch 0050/0517 | Cost: 0.6651
+Epoch: 003/030 | Batch 0100/0517 | Cost: 0.6727
+Epoch: 003/030 | Batch 0150/0517 | Cost: 0.6635
+Epoch: 003/030 | Batch 0200/0517 | Cost: 0.6783
+Epoch: 003/030 | Batch 0250/0517 | Cost: 0.6842
+Epoch: 003/030 | Batch 0300/0517 | Cost: 0.6609
+Epoch: 003/030 | Batch 0350/0517 | Cost: 0.6636
+Epoch: 003/030 | Batch 0400/0517 | Cost: 0.6575
+Epoch: 003/030 | Batch 0450/0517 | Cost: 0.6560
+Epoch: 003/030 | Batch 0500/0517 | Cost: 0.6759
+	Training Loss: 0.665670 	Validation Loss: 0.664727
+Time elapsed: 8.28 min
+Epoch: 004/030 | Batch 0000/0517 | Cost: 0.6748
+Epoch: 004/030 | Batch 0050/0517 | Cost: 0.6542
+Epoch: 004/030 | Batch 0100/0517 | Cost: 0.6666
+Epoch: 004/030 | Batch 0150/0517 | Cost: 0.6620
+Epoch: 004/030 | Batch 0200/0517 | Cost: 0.6840
+Epoch: 004/030 | Batch 0250/0517 | Cost: 0.6803
+Epoch: 004/030 | Batch 0300/0517 | Cost: 0.6614
+Epoch: 004/030 | Batch 0350/0517 | Cost: 0.6464
+Epoch: 004/030 | Batch 0400/0517 | Cost: 0.6125
+Epoch: 004/030 | Batch 0450/0517 | Cost: 0.6022
+Epoch: 004/030 | Batch 0500/0517 | Cost: 0.5894
+	Training Loss: 0.642787 	Validation Loss: 0.579318
+Time elapsed: 12.41 min
+Epoch: 005/030 | Batch 0000/0517 | Cost: 0.5942
+Epoch: 005/030 | Batch 0050/0517 | Cost: 0.5886
+Epoch: 005/030 | Batch 0100/0517 | Cost: 0.6034
+Epoch: 005/030 | Batch 0150/0517 | Cost: 0.6185
+Epoch: 005/030 | Batch 0200/0517 | Cost: 0.5649
+Epoch: 005/030 | Batch 0250/0517 | Cost: 0.5815
+Epoch: 005/030 | Batch 0300/0517 | Cost: 0.5233
+Epoch: 005/030 | Batch 0350/0517 | Cost: 0.5946
+Epoch: 005/030 | Batch 0400/0517 | Cost: 0.5558
+Epoch: 005/030 | Batch 0450/0517 | Cost: 0.5087
+Epoch: 005/030 | Batch 0500/0517 | Cost: 0.5899
+	Training Loss: 0.565228 	Validation Loss: 0.552021
+Time elapsed: 16.55 min
+Epoch: 006/030 | Batch 0000/0517 | Cost: 0.5479
+Epoch: 006/030 | Batch 0050/0517 | Cost: 0.5530
+Epoch: 006/030 | Batch 0100/0517 | Cost: 0.5579
+Epoch: 006/030 | Batch 0150/0517 | Cost: 0.5755
+Epoch: 006/030 | Batch 0200/0517 | Cost: 0.5510
+Epoch: 006/030 | Batch 0250/0517 | Cost: 0.5646
+Epoch: 006/030 | Batch 0300/0517 | Cost: 0.5594
+Epoch: 006/030 | Batch 0350/0517 | Cost: 0.5483
+Epoch: 006/030 | Batch 0400/0517 | Cost: 0.5089
+Epoch: 006/030 | Batch 0450/0517 | Cost: 0.5156
+Epoch: 006/030 | Batch 0500/0517 | Cost: 0.5656
+	Training Loss: 0.554856 	Validation Loss: 0.537888
+Time elapsed: 20.73 min
+Epoch: 007/030 | Batch 0000/0517 | Cost: 0.5199
+Epoch: 007/030 | Batch 0050/0517 | Cost: 0.5487
+Epoch: 007/030 | Batch 0100/0517 | Cost: 0.5470
+Epoch: 007/030 | Batch 0150/0517 | Cost: 0.5532
+Epoch: 007/030 | Batch 0200/0517 | Cost: 0.5532
+Epoch: 007/030 | Batch 0250/0517 | Cost: 0.5454
+Epoch: 007/030 | Batch 0300/0517 | Cost: 0.5539
+Epoch: 007/030 | Batch 0350/0517 | Cost: 0.5112
+Epoch: 007/030 | Batch 0400/0517 | Cost: 0.5103
+Epoch: 007/030 | Batch 0450/0517 | Cost: 0.5507
+Epoch: 007/030 | Batch 0500/0517 | Cost: 0.5189
+	Training Loss: 0.540999 	Validation Loss: 0.526789
+Time elapsed: 24.88 min
+Epoch: 008/030 | Batch 0000/0517 | Cost: 0.5227
+Epoch: 008/030 | Batch 0050/0517 | Cost: 0.5254
+Epoch: 008/030 | Batch 0100/0517 | Cost: 0.5275
+Epoch: 008/030 | Batch 0150/0517 | Cost: 0.5246
+Epoch: 008/030 | Batch 0200/0517 | Cost: 0.5158
+Epoch: 008/030 | Batch 0250/0517 | Cost: 0.4859
+Epoch: 008/030 | Batch 0300/0517 | Cost: 0.5324
+Epoch: 008/030 | Batch 0350/0517 | Cost: 0.4943
+Epoch: 008/030 | Batch 0400/0517 | Cost: 0.5247
+Epoch: 008/030 | Batch 0450/0517 | Cost: 0.5153
+Epoch: 008/030 | Batch 0500/0517 | Cost: 0.5870
+	Training Loss: 0.526269 	Validation Loss: 0.500235
+Time elapsed: 28.97 min
+Epoch: 009/030 | Batch 0000/0517 | Cost: 0.4910
+Epoch: 009/030 | Batch 0050/0517 | Cost: 0.5094
+Epoch: 009/030 | Batch 0100/0517 | Cost: 0.5173
+Epoch: 009/030 | Batch 0150/0517 | Cost: 0.4938
+Epoch: 009/030 | Batch 0200/0517 | Cost: 0.5152
+Epoch: 009/030 | Batch 0250/0517 | Cost: 0.4890
+Epoch: 009/030 | Batch 0300/0517 | Cost: 0.5531
+Epoch: 009/030 | Batch 0350/0517 | Cost: 0.5217
+Epoch: 009/030 | Batch 0400/0517 | Cost: 0.5042
+Epoch: 009/030 | Batch 0450/0517 | Cost: 0.4910
+Epoch: 009/030 | Batch 0500/0517 | Cost: 0.4802
+	Training Loss: 0.507803 	Validation Loss: 0.477626
+Time elapsed: 33.16 min
+Epoch: 010/030 | Batch 0000/0517 | Cost: 0.5201
+Epoch: 010/030 | Batch 0050/0517 | Cost: 0.4988
+Epoch: 010/030 | Batch 0100/0517 | Cost: 0.5016
+Epoch: 010/030 | Batch 0150/0517 | Cost: 0.4779
+Epoch: 010/030 | Batch 0200/0517 | Cost: 0.4838
+Epoch: 010/030 | Batch 0250/0517 | Cost: 0.4858
+Epoch: 010/030 | Batch 0300/0517 | Cost: 0.5001
+Epoch: 010/030 | Batch 0350/0517 | Cost: 0.4569
+Epoch: 010/030 | Batch 0400/0517 | Cost: 0.4761
+Epoch: 010/030 | Batch 0450/0517 | Cost: 0.4553
+Epoch: 010/030 | Batch 0500/0517 | Cost: 0.5057
+	Training Loss: 0.493263 	Validation Loss: 0.487665
+Time elapsed: 37.27 min
+Epoch: 011/030 | Batch 0000/0517 | Cost: 0.5108
+Epoch: 011/030 | Batch 0050/0517 | Cost: 0.4727
+Epoch: 011/030 | Batch 0100/0517 | Cost: 0.4535
+Epoch: 011/030 | Batch 0150/0517 | Cost: 0.4977
+Epoch: 011/030 | Batch 0200/0517 | Cost: 0.4901
+Epoch: 011/030 | Batch 0250/0517 | Cost: 0.4861
+Epoch: 011/030 | Batch 0300/0517 | Cost: 0.4949
+Epoch: 011/030 | Batch 0350/0517 | Cost: 0.5012
+Epoch: 011/030 | Batch 0400/0517 | Cost: 0.4780
+Epoch: 011/030 | Batch 0450/0517 | Cost: 0.4908
+Epoch: 011/030 | Batch 0500/0517 | Cost: 0.4929
+	Training Loss: 0.487624 	Validation Loss: 0.462546
+Time elapsed: 41.38 min
+Epoch: 012/030 | Batch 0000/0517 | Cost: 0.4888
+Epoch: 012/030 | Batch 0050/0517 | Cost: 0.5104
+Epoch: 012/030 | Batch 0100/0517 | Cost: 0.4943
+Epoch: 012/030 | Batch 0150/0517 | Cost: 0.4806
+Epoch: 012/030 | Batch 0200/0517 | Cost: 0.5179
+Epoch: 012/030 | Batch 0250/0517 | Cost: 0.4801
+Epoch: 012/030 | Batch 0300/0517 | Cost: 0.4923
+Epoch: 012/030 | Batch 0350/0517 | Cost: 0.4645
+Epoch: 012/030 | Batch 0400/0517 | Cost: 0.4614
+Epoch: 012/030 | Batch 0450/0517 | Cost: 0.4846
+Epoch: 012/030 | Batch 0500/0517 | Cost: 0.4726
+	Training Loss: 0.479692 	Validation Loss: 0.460912
+Time elapsed: 45.49 min
+Epoch: 013/030 | Batch 0000/0517 | Cost: 0.4544
+Epoch: 013/030 | Batch 0050/0517 | Cost: 0.4772
+Epoch: 013/030 | Batch 0100/0517 | Cost: 0.4633
+Epoch: 013/030 | Batch 0150/0517 | Cost: 0.4763
+Epoch: 013/030 | Batch 0200/0517 | Cost: 0.4572
+Epoch: 013/030 | Batch 0250/0517 | Cost: 0.4757
+Epoch: 013/030 | Batch 0300/0517 | Cost: 0.4876
+Epoch: 013/030 | Batch 0350/0517 | Cost: 0.4849
+Epoch: 013/030 | Batch 0400/0517 | Cost: 0.4681
+Epoch: 013/030 | Batch 0450/0517 | Cost: 0.5214
+Epoch: 013/030 | Batch 0500/0517 | Cost: 0.4760
+	Training Loss: 0.475798 	Validation Loss: 0.454532
+Time elapsed: 49.62 min
+Epoch: 014/030 | Batch 0000/0517 | Cost: 0.4676
+Epoch: 014/030 | Batch 0050/0517 | Cost: 0.4721
+Epoch: 014/030 | Batch 0100/0517 | Cost: 0.4829
+Epoch: 014/030 | Batch 0150/0517 | Cost: 0.4574
+Epoch: 014/030 | Batch 0200/0517 | Cost: 0.5015
+Epoch: 014/030 | Batch 0250/0517 | Cost: 0.4704
+Epoch: 014/030 | Batch 0300/0517 | Cost: 0.4633
+Epoch: 014/030 | Batch 0350/0517 | Cost: 0.4747
+Epoch: 014/030 | Batch 0400/0517 | Cost: 0.4572
+Epoch: 014/030 | Batch 0450/0517 | Cost: 0.4491
+Epoch: 014/030 | Batch 0500/0517 | Cost: 0.4898
+	Training Loss: 0.471428 	Validation Loss: 0.457588
+Time elapsed: 53.75 min
+Epoch: 015/030 | Batch 0000/0517 | Cost: 0.4840
+Epoch: 015/030 | Batch 0050/0517 | Cost: 0.4414
+Epoch: 015/030 | Batch 0100/0517 | Cost: 0.4538
+Epoch: 015/030 | Batch 0150/0517 | Cost: 0.4915
+Epoch: 015/030 | Batch 0200/0517 | Cost: 0.4700
+Epoch: 015/030 | Batch 0250/0517 | Cost: 0.4566
+Epoch: 015/030 | Batch 0300/0517 | Cost: 0.4656
+Epoch: 015/030 | Batch 0350/0517 | Cost: 0.4606
+Epoch: 015/030 | Batch 0400/0517 | Cost: 0.4616
+Epoch: 015/030 | Batch 0450/0517 | Cost: 0.4625
+Epoch: 015/030 | Batch 0500/0517 | Cost: 0.4513
+	Training Loss: 0.470199 	Validation Loss: 0.448708
+Time elapsed: 57.89 min
+Epoch: 016/030 | Batch 0000/0517 | Cost: 0.4340
+Epoch: 016/030 | Batch 0050/0517 | Cost: 0.4790
+Epoch: 016/030 | Batch 0100/0517 | Cost: 0.4788
+Epoch: 016/030 | Batch 0150/0517 | Cost: 0.4579
+Epoch: 016/030 | Batch 0200/0517 | Cost: 0.4840
+Epoch: 016/030 | Batch 0250/0517 | Cost: 0.4468
+Epoch: 016/030 | Batch 0300/0517 | Cost: 0.4900
+Epoch: 016/030 | Batch 0350/0517 | Cost: 0.4638
+Epoch: 016/030 | Batch 0400/0517 | Cost: 0.4747
+Epoch: 016/030 | Batch 0450/0517 | Cost: 0.4851
+Epoch: 016/030 | Batch 0500/0517 | Cost: 0.4689
+	Training Loss: 0.466364 	Validation Loss: 0.453677
+Time elapsed: 62.11 min
+Epoch: 017/030 | Batch 0000/0517 | Cost: 0.4562
+Epoch: 017/030 | Batch 0050/0517 | Cost: 0.5050
+Epoch: 017/030 | Batch 0100/0517 | Cost: 0.4273
+Epoch: 017/030 | Batch 0150/0517 | Cost: 0.4773
+Epoch: 017/030 | Batch 0200/0517 | Cost: 0.4694
+Epoch: 017/030 | Batch 0250/0517 | Cost: 0.4529
+Epoch: 017/030 | Batch 0300/0517 | Cost: 0.4733
+Epoch: 017/030 | Batch 0350/0517 | Cost: 0.4485
+Epoch: 017/030 | Batch 0400/0517 | Cost: 0.4702
+Epoch: 017/030 | Batch 0450/0517 | Cost: 0.4487
+Epoch: 017/030 | Batch 0500/0517 | Cost: 0.4723
+	Training Loss: 0.463667 	Validation Loss: 0.447782
+Time elapsed: 66.27 min
+Epoch: 018/030 | Batch 0000/0517 | Cost: 0.4737
+Epoch: 018/030 | Batch 0050/0517 | Cost: 0.4488
+Epoch: 018/030 | Batch 0100/0517 | Cost: 0.4740
+Epoch: 018/030 | Batch 0150/0517 | Cost: 0.4481
+Epoch: 018/030 | Batch 0200/0517 | Cost: 0.4624
+Epoch: 018/030 | Batch 0250/0517 | Cost: 0.4643
+Epoch: 018/030 | Batch 0300/0517 | Cost: 0.4733
+Epoch: 018/030 | Batch 0350/0517 | Cost: 0.4713
+Epoch: 018/030 | Batch 0400/0517 | Cost: 0.4665
+Epoch: 018/030 | Batch 0450/0517 | Cost: 0.4570
+Epoch: 018/030 | Batch 0500/0517 | Cost: 0.4721
+	Training Loss: 0.460682 	Validation Loss: 0.438074
+Time elapsed: 70.43 min
+Epoch: 019/030 | Batch 0000/0517 | Cost: 0.4619
+Epoch: 019/030 | Batch 0050/0517 | Cost: 0.5034
+Epoch: 019/030 | Batch 0100/0517 | Cost: 0.4291
+Epoch: 019/030 | Batch 0150/0517 | Cost: 0.4642
+Epoch: 019/030 | Batch 0200/0517 | Cost: 0.4256
+Epoch: 019/030 | Batch 0250/0517 | Cost: 0.4489
+Epoch: 019/030 | Batch 0300/0517 | Cost: 0.4549
+Epoch: 019/030 | Batch 0350/0517 | Cost: 0.4623
+Epoch: 019/030 | Batch 0400/0517 | Cost: 0.4743
+Epoch: 019/030 | Batch 0450/0517 | Cost: 0.4738
+Epoch: 019/030 | Batch 0500/0517 | Cost: 0.4548
+	Training Loss: 0.457328 	Validation Loss: 0.435292
+Time elapsed: 74.56 min
+Epoch: 020/030 | Batch 0000/0517 | Cost: 0.4576
+Epoch: 020/030 | Batch 0050/0517 | Cost: 0.4540
+Epoch: 020/030 | Batch 0100/0517 | Cost: 0.4298
+Epoch: 020/030 | Batch 0150/0517 | Cost: 0.4257
+Epoch: 020/030 | Batch 0200/0517 | Cost: 0.4625
+Epoch: 020/030 | Batch 0250/0517 | Cost: 0.4532
+Epoch: 020/030 | Batch 0300/0517 | Cost: 0.4308
+Epoch: 020/030 | Batch 0350/0517 | Cost: 0.4401
+Epoch: 020/030 | Batch 0400/0517 | Cost: 0.4557
+Epoch: 020/030 | Batch 0450/0517 | Cost: 0.4599
+Epoch: 020/030 | Batch 0500/0517 | Cost: 0.4864
+	Training Loss: 0.456159 	Validation Loss: 0.433110
+Time elapsed: 78.70 min
+Epoch: 021/030 | Batch 0000/0517 | Cost: 0.4745
+Epoch: 021/030 | Batch 0050/0517 | Cost: 0.4630
+Epoch: 021/030 | Batch 0100/0517 | Cost: 0.4735
+Epoch: 021/030 | Batch 0150/0517 | Cost: 0.4473
+Epoch: 021/030 | Batch 0200/0517 | Cost: 0.4322
+Epoch: 021/030 | Batch 0250/0517 | Cost: 0.4624
+Epoch: 021/030 | Batch 0300/0517 | Cost: 0.4452
+Epoch: 021/030 | Batch 0350/0517 | Cost: 0.4700
+Epoch: 021/030 | Batch 0400/0517 | Cost: 0.4450
+Epoch: 021/030 | Batch 0450/0517 | Cost: 0.4547
+Epoch: 021/030 | Batch 0500/0517 | Cost: 0.4636
+	Training Loss: 0.453615 	Validation Loss: 0.434472
+Time elapsed: 82.82 min
+Epoch: 022/030 | Batch 0000/0517 | Cost: 0.4258
+Epoch: 022/030 | Batch 0050/0517 | Cost: 0.4272
+Epoch: 022/030 | Batch 0100/0517 | Cost: 0.4517
+Epoch: 022/030 | Batch 0150/0517 | Cost: 0.4763
+Epoch: 022/030 | Batch 0200/0517 | Cost: 0.4333
+Epoch: 022/030 | Batch 0250/0517 | Cost: 0.4451
+Epoch: 022/030 | Batch 0300/0517 | Cost: 0.4527
+Epoch: 022/030 | Batch 0350/0517 | Cost: 0.4305
+Epoch: 022/030 | Batch 0400/0517 | Cost: 0.4536
+Epoch: 022/030 | Batch 0450/0517 | Cost: 0.4834
+Epoch: 022/030 | Batch 0500/0517 | Cost: 0.4323
+	Training Loss: 0.451938 	Validation Loss: 0.442644
+Time elapsed: 86.96 min
+Epoch: 023/030 | Batch 0000/0517 | Cost: 0.4764
+Epoch: 023/030 | Batch 0050/0517 | Cost: 0.4589
+Epoch: 023/030 | Batch 0100/0517 | Cost: 0.4420
+Epoch: 023/030 | Batch 0150/0517 | Cost: 0.4475
+Epoch: 023/030 | Batch 0200/0517 | Cost: 0.4374
+Epoch: 023/030 | Batch 0250/0517 | Cost: 0.4298
+Epoch: 023/030 | Batch 0300/0517 | Cost: 0.4324
+Epoch: 023/030 | Batch 0350/0517 | Cost: 0.4852
+Epoch: 023/030 | Batch 0400/0517 | Cost: 0.4298
+Epoch: 023/030 | Batch 0450/0517 | Cost: 0.4527
+Epoch: 023/030 | Batch 0500/0517 | Cost: 0.4119
+	Training Loss: 0.448686 	Validation Loss: 0.425830
+Time elapsed: 91.08 min
+Epoch: 024/030 | Batch 0000/0517 | Cost: 0.4758
+Epoch: 024/030 | Batch 0050/0517 | Cost: 0.4161
+Epoch: 024/030 | Batch 0100/0517 | Cost: 0.4469
+Epoch: 024/030 | Batch 0150/0517 | Cost: 0.4283
+Epoch: 024/030 | Batch 0200/0517 | Cost: 0.4612
+Epoch: 024/030 | Batch 0250/0517 | Cost: 0.4683
+Epoch: 024/030 | Batch 0300/0517 | Cost: 0.4565
+Epoch: 024/030 | Batch 0350/0517 | Cost: 0.4469
+Epoch: 024/030 | Batch 0400/0517 | Cost: 0.4287
+Epoch: 024/030 | Batch 0450/0517 | Cost: 0.4272
+Epoch: 024/030 | Batch 0500/0517 | Cost: 0.4592
+	Training Loss: 0.447322 	Validation Loss: 0.429355
+Time elapsed: 95.26 min
+Epoch: 025/030 | Batch 0000/0517 | Cost: 0.4036
+Epoch: 025/030 | Batch 0050/0517 | Cost: 0.4460
+Epoch: 025/030 | Batch 0100/0517 | Cost: 0.4763
+Epoch: 025/030 | Batch 0150/0517 | Cost: 0.4290
+Epoch: 025/030 | Batch 0200/0517 | Cost: 0.4244
+Epoch: 025/030 | Batch 0250/0517 | Cost: 0.4216
+Epoch: 025/030 | Batch 0300/0517 | Cost: 0.4360
+Epoch: 025/030 | Batch 0350/0517 | Cost: 0.4489
+Epoch: 025/030 | Batch 0400/0517 | Cost: 0.4635
+Epoch: 025/030 | Batch 0450/0517 | Cost: 0.4546
+Epoch: 025/030 | Batch 0500/0517 | Cost: 0.4442
+	Training Loss: 0.446144 	Validation Loss: 0.448515
+Time elapsed: 99.43 min
+Epoch: 026/030 | Batch 0000/0517 | Cost: 0.4538
+Epoch: 026/030 | Batch 0050/0517 | Cost: 0.4456
+Epoch: 026/030 | Batch 0100/0517 | Cost: 0.4559
+Epoch: 026/030 | Batch 0150/0517 | Cost: 0.4342
+Epoch: 026/030 | Batch 0200/0517 | Cost: 0.4203
+Epoch: 026/030 | Batch 0250/0517 | Cost: 0.4599
+Epoch: 026/030 | Batch 0300/0517 | Cost: 0.4506
+Epoch: 026/030 | Batch 0350/0517 | Cost: 0.4242
+Epoch: 026/030 | Batch 0400/0517 | Cost: 0.4301
+Epoch: 026/030 | Batch 0450/0517 | Cost: 0.4389
+Epoch: 026/030 | Batch 0500/0517 | Cost: 0.4422
+	Training Loss: 0.445335 	Validation Loss: 0.422431
+Time elapsed: 103.56 min
+Epoch: 027/030 | Batch 0000/0517 | Cost: 0.4462
+Epoch: 027/030 | Batch 0050/0517 | Cost: 0.4287
+Epoch: 027/030 | Batch 0100/0517 | Cost: 0.4098
+Epoch: 027/030 | Batch 0150/0517 | Cost: 0.4576
+Epoch: 027/030 | Batch 0200/0517 | Cost: 0.5101
+Epoch: 027/030 | Batch 0250/0517 | Cost: 0.4393
+Epoch: 027/030 | Batch 0300/0517 | Cost: 0.4432
+Epoch: 027/030 | Batch 0350/0517 | Cost: 0.4548
+Epoch: 027/030 | Batch 0400/0517 | Cost: 0.4409
+Epoch: 027/030 | Batch 0450/0517 | Cost: 0.4192
+Epoch: 027/030 | Batch 0500/0517 | Cost: 0.4547
+	Training Loss: 0.442817 	Validation Loss: 0.423848
+Time elapsed: 107.72 min
+Epoch: 028/030 | Batch 0000/0517 | Cost: 0.4756
+Epoch: 028/030 | Batch 0050/0517 | Cost: 0.4548
+Epoch: 028/030 | Batch 0100/0517 | Cost: 0.4446
+Epoch: 028/030 | Batch 0150/0517 | Cost: 0.4257
+Epoch: 028/030 | Batch 0200/0517 | Cost: 0.4670
+Epoch: 028/030 | Batch 0250/0517 | Cost: 0.4200
+Epoch: 028/030 | Batch 0300/0517 | Cost: 0.4277
+Epoch: 028/030 | Batch 0350/0517 | Cost: 0.4551
+Epoch: 028/030 | Batch 0400/0517 | Cost: 0.4738
+Epoch: 028/030 | Batch 0450/0517 | Cost: 0.4380
+Epoch: 028/030 | Batch 0500/0517 | Cost: 0.4193
+	Training Loss: 0.441448 	Validation Loss: 0.421043
+Time elapsed: 111.89 min
+Epoch: 029/030 | Batch 0000/0517 | Cost: 0.4231
+Epoch: 029/030 | Batch 0050/0517 | Cost: 0.4843
+Epoch: 029/030 | Batch 0100/0517 | Cost: 0.3937
+Epoch: 029/030 | Batch 0150/0517 | Cost: 0.4399
+Epoch: 029/030 | Batch 0200/0517 | Cost: 0.4583
+Epoch: 029/030 | Batch 0250/0517 | Cost: 0.4583
+Epoch: 029/030 | Batch 0300/0517 | Cost: 0.4559
+Epoch: 029/030 | Batch 0350/0517 | Cost: 0.4137
+Epoch: 029/030 | Batch 0400/0517 | Cost: 0.4173
+Epoch: 029/030 | Batch 0450/0517 | Cost: 0.4862
+Epoch: 029/030 | Batch 0500/0517 | Cost: 0.4609
+	Training Loss: 0.439600 	Validation Loss: 0.421236
+Time elapsed: 116.00 min
+Epoch: 030/030 | Batch 0000/0517 | Cost: 0.4412
+Epoch: 030/030 | Batch 0050/0517 | Cost: 0.4342
+Epoch: 030/030 | Batch 0100/0517 | Cost: 0.4347
+Epoch: 030/030 | Batch 0150/0517 | Cost: 0.4157
+Epoch: 030/030 | Batch 0200/0517 | Cost: 0.4525
+Epoch: 030/030 | Batch 0250/0517 | Cost: 0.4920
+Epoch: 030/030 | Batch 0300/0517 | Cost: 0.4199
+Epoch: 030/030 | Batch 0350/0517 | Cost: 0.4417
+Epoch: 030/030 | Batch 0400/0517 | Cost: 0.4133
+Epoch: 030/030 | Batch 0450/0517 | Cost: 0.4554
+Epoch: 030/030 | Batch 0500/0517 | Cost: 0.4612
+	Training Loss: 0.439481 	Validation Loss: 0.429177
+Time elapsed: 120.18 min
+Epoch: 031/030 | Batch 0000/0517 | Cost: 0.4153
+Epoch: 031/030 | Batch 0050/0517 | Cost: 0.4507
+Epoch: 031/030 | Batch 0100/0517 | Cost: 0.4182
+Epoch: 031/030 | Batch 0150/0517 | Cost: 0.4159
+Epoch: 031/030 | Batch 0200/0517 | Cost: 0.4395
+Epoch: 031/030 | Batch 0250/0517 | Cost: 0.4604
+Epoch: 031/030 | Batch 0300/0517 | Cost: 0.4157
+Epoch: 031/030 | Batch 0350/0517 | Cost: 0.4275
+Epoch: 031/030 | Batch 0400/0517 | Cost: 0.4380
+Epoch: 031/030 | Batch 0450/0517 | Cost: 0.4481
+Epoch: 031/030 | Batch 0500/0517 | Cost: 0.4214
+	Training Loss: 0.438661 	Validation Loss: 0.417835
+Time elapsed: 124.30 min
+Test Loss: 0.422464 | Test Accuracy: %2d%% (%2d/%2d)

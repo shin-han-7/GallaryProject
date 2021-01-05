@@ -232,7 +232,8 @@ for epoch in range(num_epochs):
 
     model.train()
     for batch_idx, (features, targets, levels) in enumerate(train_loader):
-
+        if not batch_idx % 50:
+            print('debug pred:',targets, levels)
         features = features.to(DEVICE)
         targets = targets
         targets = targets.to(DEVICE)
@@ -240,6 +241,8 @@ for epoch in range(num_epochs):
 
         # FORWARD AND BACK PROP
         logits, probas = model(features)
+        if not batch_idx % 50:
+            print('debug output:',logits,probas)
         cost = cost_fn(logits, levels, imp)
         optimizer.zero_grad()
 

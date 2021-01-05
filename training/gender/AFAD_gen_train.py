@@ -79,8 +79,13 @@ class AFAD_Gen_Dataset(Dataset):
         img = Image.open(os.path.join(self.root_dir, self.img_paths[index]))
         if self.transform is not None:
             img = self.transform(img)
-        label = self.gens[index]
-        #label = torch.tensor(label, dtype=torch.float32)
+        genID = self.gens[index]
+        if genID==1:#female
+            label=[0,1]
+        else:
+            label=[1,0]
+        label = torch.tensor(label, dtype=torch.long)
+        #print('debug label:',label)
         return img, label
 
     def __len__(self):
@@ -126,12 +131,12 @@ valid_loader = DataLoader(valid_dataset,
                          shuffle=False,
                          num_workers= NUM_WORKERS)
 
-#print('[id=10]img arr:',test_dataset[10][0],',genID:',test_dataset[10][1])
-#print('type:',type(test_dataset[10][0]),type(test_dataset[10][1]))
+print('[id=10]img arr:',test_dataset[10][0],',genID:',test_dataset[10][1])
+print('type:',type(test_dataset[10][0]),type(test_dataset[10][1]))
 #<class 'torch.Tensor'> <class 'numpy.int64'>
 #print('len:',len(test_dataset[10][0]))#3
-images,labels=next(iter(test_loader))
-print(images.shape,labels.shape)
+#images,labels=next(iter(test_loader))
+#print(images.shape,labels.shape)#torch.Size([128, 3, 227, 227]) torch.Size([128])
 
 
 ################
@@ -188,8 +193,8 @@ class CNN_Model(nn.Module):
         return out
 
 model = CNN_Model()
-from torchsummary import summary
-summary(model.to(DEVICE), (3, 227, 227))
+'''from torchsummary import summary
+summary(model.to(DEVICE), (3, 227, 227))'''
 
 ##################
 # Train
@@ -198,11 +203,13 @@ summary(model.to(DEVICE), (3, 227, 227))
 # show train sechdule line
 model.to(DEVICE)
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=LEARN_RATE, momentum = 0.9)
+optimizer = torch.optim.Adam(model.parameters(), lr=LEARN_RATE)
+
 
 valid_loss_min = np.Inf # track change in validation loss
 train_losses,valid_losses=[],[]
 
+start_time = time.time()
 for epoch in range(1, EPOCH + 1):
     # keep track of training and validation loss
     train_loss = 0.0
@@ -211,24 +218,34 @@ for epoch in range(1, EPOCH + 1):
     
     ############train############
     model.train()
-    #for data, target in train_loader:
+
     for batch_idx, (data, target) in enumerate(train_loader):
         # move tensors to GPU if CUDA is available
         data, target = data.to(DEVICE), target.to(DEVICE)
+        #if not batch_idx % 50:
+        #    print('debug input predict:',target)
         # clear the gradients of all optimized variables
         optimizer.zero_grad()
         # forward pass: compute predicted outputs by passing inputs to the model
         output = model(data)
+        if not batch_idx % 50:
+            print('debug tar:',torch.max(target, 1)[1])
         # calculate the batch loss
-        loss = criterion(output, target)
+        loss = criterion(output, torch.max(target, 1)[1])
         # backward pass: compute gradient of the loss with respect to model parameters
         loss.backward()
         # perform a single optimization step (parameter update)
         optimizer.step()
         # update training loss
-        train_loss += loss.item()*data.size(0)
-
+        train_loss += loss.item()#*data.size(0)
         
+        if not batch_idx % 50:
+            s = ('Epoch: %03d/%03d | Batch %04d/%04d | Cost: %.4f'
+                    % (epoch+1, EPOCH, batch_idx,len(train_dataset)//BATCH_SIZE, loss))
+            print(s)
+            with open(LOGFILE, 'a') as f:
+                f.write('%s\n' % s)
+
     ######### valid##########
     model.eval()
     for batch_idx, (data, target) in enumerate(valid_loader):
@@ -239,11 +256,11 @@ for epoch in range(1, EPOCH + 1):
         # calculate the batch loss
         loss = criterion(output, target)
         # update average validation loss 
-        valid_loss += loss.item()*data.size(0)
+        valid_loss += loss.item()#*data.size(0)
     
     # calculate average losses
     train_losses.append(train_loss/len(train_loader.dataset))
-    valid_losses.append(valid_loss.item()/len(valid_loader.dataset))
+    valid_losses.append(valid_loss/len(valid_loader.dataset))
     train_loss = train_loss/len(train_loader.dataset)
     valid_loss = valid_loss/len(valid_loader.dataset)
         
@@ -259,6 +276,11 @@ for epoch in range(1, EPOCH + 1):
         valid_loss_min,valid_loss))
         torch.save(model.state_dict(), MODEL_SAVE)
         valid_loss_min = valid_loss
+    
+    s = 'Time elapsed: %.2f min' % ((time.time() - start_time)/60)
+    print(s)
+    with open(LOGFILE, 'a') as f:
+        f.write('%s\n' % s)
 
 
 #############
