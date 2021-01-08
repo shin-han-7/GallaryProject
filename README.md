@@ -16,6 +16,7 @@
     - `track.py` get obj ID/ xy coordinate
 (3) output `frame/`,`person/`,`result.txt` in file: InOut/【FILENAME】/2_MOT_output/
 ```
+Reference source: https://github.com/Zhongdao/Towards-Realtime-MOT
 
 ## Recognize
 ### STEP01.AFAD_Dataset
