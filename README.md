@@ -12,17 +12,17 @@
 
 ## Tracking
 ```
-(1) set `video.mp4` in file: InOut/【FILENAME】/1_input/video.mp4
-(2) run `MOT/demo.py`
-    - `track.py` get obj ID/ xy coordinate
-(3) output `frame/`,`person/`,`result.txt` in file: InOut/【FILENAME】/2_MOT_output/
+(1) set "video.mp4" in file: InOut/【FILENAME】/1_input/video.mp4
+(2) run "MOT/demo.py"
+    - "track.py" get obj ID/ xy coordinate
+(3) output "frame/","person/","result.txt" in file: InOut/【FILENAME】/2_MOT_output/
 ```
 Reference source: https://github.com/Zhongdao/Towards-Realtime-MOT
 
 ## Recognize
 ### STEP01.AFAD_Dataset
 - cd dataset
-- 移動至`./dataset/tarball/`
+- cd tarball
 - 執行```$ sh restore.sh```, get`AFAD-Lite.tar.xz `
 - 安裝套件```$ sudo apt-get install -y xz-utils```
 - 解壓縮```$ tar Jxvf AFAD-Lite.tar.xz```, get`/AFAD-Full`
