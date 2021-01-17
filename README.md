@@ -1,4 +1,5 @@
-# GallaryProject
+# GalleryProject
+分析美術館單一畫框前，觀看人次計數，以及觀看者性別、年齡區段分布。
 
 ## System Flow
 ```
